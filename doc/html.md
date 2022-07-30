@@ -5,9 +5,9 @@ table of contents](TOC.md)
 
 By default, HTML5 Boilerplate provides two `html` pages:
 
-* [`index.html`](#indexhtml) - a default HTML skeleton that should form the
+- [`index.html`](#indexhtml) - a default HTML skeleton that should form the
   basis of all pages on your website
-* `404.html` - a placeholder 404 error page
+- `404.html` - a placeholder 404 error page
 
 ## `index.html`
 
@@ -25,7 +25,7 @@ Please consider specifying the language of your content by adding a
 to the `lang` attribute in the `<html>` as in this example:
 
 ```html
-<html class="no-js" lang="en">
+<html class="no-js" lang="en"></html>
 ```
 
 ### The order of the `<title>` and `<meta>` tags
@@ -46,7 +46,7 @@ situations this description is used as a part of the snippet shown in the search
 results.
 
 ```html
-<meta name="description" content="This is a description">
+<meta name="description" content="This is a description" />
 ```
 
 Google's [Create good meta
@@ -64,7 +64,7 @@ HTML5 Boilerplate comes with a simple setup that strikes a good balance for
 general use cases.
 
 ```html
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 ```
 
 If you want to take advantage of edge-to-edge displays of iPhone X/XS/XR you
@@ -81,11 +81,11 @@ that define the details of your site. The required attributes define the title,
 preview image, URL, and [type](https://ogp.me/#types) (e.g., video, music,
 website, article).
 
-``` html
-<meta property="og:title" content="">
-<meta property="og:type" content="">
-<meta property="og:url" content="">
-<meta property="og:image" content="">
+```html
+<meta property="og:title" content="" />
+<meta property="og:type" content="" />
+<meta property="og:url" content="" />
+<meta property="og:image" content="" />
 ```
 
 In addition to these four attributes there are many more attributes you can use
@@ -96,12 +96,15 @@ To see a working example, the following is the open graph metadata for the HTML5
 Boilerplate site. In addition to the required fields we add `og:description` to
 describe the site in more detail.
 
-``` html
-<meta name="og:url" content="https://html5boilerplate.com/">
-<meta name="og:title" content="HTML5 ★ BOILERPLATE">
-<meta name="og:type" content="website">
-<meta name="og:description" content="The web’s most popular front-end template which helps you build fast, robust, and adaptable web apps or sites.">
-<meta name="og:image" content="https://html5boilerplate.com/icon.png">
+```html
+<meta name="og:url" content="https://html5boilerplate.com/" />
+<meta name="og:title" content="HTML5 ★ BOILERPLATE" />
+<meta name="og:type" content="website" />
+<meta
+  name="og:description"
+  content="The web’s most popular front-end template which helps you build fast, robust, and adaptable web apps or sites."
+/>
+<meta name="og:image" content="https://html5boilerplate.com/icon.png" />
 ```
 
 ### Web App Manifest
@@ -116,7 +119,7 @@ control over the UI of a saved site or web app on a mobile device.
 It's linked to from the HTML as follows:
 
 ```html
-<link rel="manifest" href="site.webmanifest">
+<link rel="manifest" href="site.webmanifest" />
 ```
 
 Our
@@ -204,9 +207,16 @@ to the `index.html` manually.
 
 To load jQuery from a CDN with a local fallback you can use the following:
 
-``` html
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"  integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
-<script>window.jQuery || document.write('<script src="js/vendor/jquery-3.5.1.min.js"><\/script>')</script>
+```html
+<script
+  src="https://code.jquery.com/jquery-3.5.1.min.js"
+  integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+  crossorigin="anonymous"
+></script>
+<script>
+  window.jQuery ||
+    document.write('<script src="js/vendor/jquery-3.5.1.min.js"><\/script>')
+</script>
 ```
 
 ### Google Universal Analytics Tracking Code
@@ -240,10 +250,10 @@ it is still possible to use analytics to violate GDPR.
 
 Further information:
 
-* [Introduction to
+- [Introduction to
   Analytics.js](https://developers.google.com/analytics/devguides/collection/analyticsjs/)
-* [Google Analytics Demos & Tools](https://ga-dev-tools.appspot.com/)
-* [Privacy Controls in Google Analytics](https://support.google.com/analytics/answer/9019185)
+- [Google Analytics Demos & Tools](https://ga-dev-tools.appspot.com/)
+- [Privacy Controls in Google Analytics](https://support.google.com/analytics/answer/9019185)
 
 **N.B.** The Google Analytics snippet is included by default mainly because
 Google Analytics is [currently one of the most popular tracking

@@ -7,17 +7,17 @@ Here is some useful advice for how you can make your project with HTML5
 Boilerplate even better. We don't want to include it all by default, as not
 everything fits with everyone's needs.
 
-* [App Stores](#app-stores)
-* [DNS prefetching](#dns-prefetching)
-* [Google Universal Analytics](#google-universal-analytics)
-* [Internet Explorer](#internet-explorer)
-* [Miscellaneous](#miscellaneous)
-* [News Feeds](#news-feeds)
-* [Search](#search)
-* [Social Networks](#social-networks)
-* [URLs](#urls)
-* [Web Apps](#web-apps)
-* [security.txt](#security.txt)
+- [App Stores](#app-stores)
+- [DNS prefetching](#dns-prefetching)
+- [Google Universal Analytics](#google-universal-analytics)
+- [Internet Explorer](#internet-explorer)
+- [Miscellaneous](#miscellaneous)
+- [News Feeds](#news-feeds)
+- [Search](#search)
+- [Social Networks](#social-networks)
+- [URLs](#urls)
+- [Web Apps](#web-apps)
+- [security.txt](#security.txt)
 
 ## App Stores
 
@@ -30,7 +30,7 @@ will unobtrusively give the user the option to download your iOS app, or open it
 with some data about the user's current state on the website.
 
 ```html
-<meta name="apple-itunes-app" content="app-id=APP_ID,app-argument=SOME_TEXT">
+<meta name="apple-itunes-app" content="app-id=APP_ID,app-argument=SOME_TEXT" />
 ```
 
 ## DNS prefetching
@@ -62,8 +62,8 @@ or a CDN that hosts content that may not be present on every page of your site,
 for example) then you can queue up a domain name to be prefetched.
 
 ```html
-<link rel="dns-prefetch" href="//example.com">
-<link rel="dns-prefetch" href="https://ajax.googleapis.com">
+<link rel="dns-prefetch" href="//example.com" />
+<link rel="dns-prefetch" href="https://ajax.googleapis.com" />
 ```
 
 You can use as many of these as you need, but it's best if they are all
@@ -77,27 +77,27 @@ on them ASAP.
 Amazon S3:
 
 ```html
-<link rel="dns-prefetch" href="//s3.amazonaws.com">
+<link rel="dns-prefetch" href="//s3.amazonaws.com" />
 ```
 
 Google APIs:
 
 ```html
-<link rel="dns-prefetch" href="https://ajax.googleapis.com">
+<link rel="dns-prefetch" href="https://ajax.googleapis.com" />
 ```
 
 Microsoft Ajax Content Delivery Network:
 
 ```html
-<link rel="dns-prefetch" href="//ajax.microsoft.com">
-<link rel="dns-prefetch" href="//ajax.aspnetcdn.com">
+<link rel="dns-prefetch" href="//ajax.microsoft.com" />
+<link rel="dns-prefetch" href="//ajax.aspnetcdn.com" />
 ```
 
 ### Further reading about DNS prefetching
 
-* https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-DNS-Prefetch-Control
-* https://dev.chromium.org/developers/design-documents/dns-prefetching
-* https://docs.microsoft.com/en-us/archive/blogs/ie/internet-explorer-9-network-performance-improvements
+- https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-DNS-Prefetch-Control
+- https://dev.chromium.org/developers/design-documents/dns-prefetching
+- https://docs.microsoft.com/en-us/archive/blogs/ie/internet-explorer-9-network-performance-improvements
 
 ## Google Universal Analytics
 
@@ -108,7 +108,8 @@ snippet](https://mathiasbynens.be/notes/async-analytics-snippet#universal-analyt
 included with HTML5 Boilerplate includes something like this:
 
 ```js
-ga('create', 'UA-XXXXX-X', 'auto'); ga('send', 'pageview');
+ga('create', 'UA-XXXXX-X', 'auto')
+ga('send', 'pageview')
 ```
 
 To customize further, see Google's [Advanced
@@ -130,10 +131,10 @@ Add this to `plugins.js`:
  * Log all jQuery AJAX requests to Google Analytics
  * See: https://www.alfajango.com/blog/track-jquery-ajax-requests-in-google-analytics/
  */
-if (typeof ga !== "undefined" && ga !== null) {
-    $(document).ajaxSend(function(event, xhr, settings){
-        ga('send', 'pageview', settings.url);
-    });
+if (typeof ga !== 'undefined' && ga !== null) {
+  $(document).ajaxSend(function (event, xhr, settings) {
+    ga('send', 'pageview', settings.url)
+  })
 }
 ```
 
@@ -142,24 +143,32 @@ if (typeof ga !== "undefined" && ga !== null) {
 Add this function after `ga` is defined:
 
 ```js
-(function(window){
-    var undefined,
-        link = function (href) {
-            var a = window.document.createElement('a');
-            a.href = href;
-            return a;
-        };
-    window.onerror = function (message, file, line, column) {
-        var host = link(file).hostname;
-        ga('send', {
-          'hitType': 'event',
-          'eventCategory': (host == window.location.hostname || host == undefined || host == '' ? '' : 'external ') + 'error',
-          'eventAction': message,
-          'eventLabel': (file + ' LINE: ' + line + (column ? ' COLUMN: ' + column : '')).trim(),
-          'nonInteraction': 1
-        });
-    };
-}(window));
+;(function (window) {
+  var undefined,
+    link = function (href) {
+      var a = window.document.createElement('a')
+      a.href = href
+      return a
+    }
+  window.onerror = function (message, file, line, column) {
+    var host = link(file).hostname
+    ga('send', {
+      hitType: 'event',
+      eventCategory:
+        (host == window.location.hostname || host == undefined || host == ''
+          ? ''
+          : 'external ') + 'error',
+      eventAction: message,
+      eventLabel: (
+        file +
+        ' LINE: ' +
+        line +
+        (column ? ' COLUMN: ' + column : '')
+      ).trim(),
+      nonInteraction: 1
+    })
+  }
+})(window)
 ```
 
 ### Track page scroll
@@ -167,23 +176,35 @@ Add this function after `ga` is defined:
 Add this function after `ga` is defined. Note, the following snippet requires jQuery.
 
 ```js
-$(function(){
-    var isDuplicateScrollEvent,
-        scrollTimeStart = new Date,
-        $window = $(window),
-        $document = $(document),
-        scrollPercent;
+$(function () {
+  var isDuplicateScrollEvent,
+    scrollTimeStart = new Date(),
+    $window = $(window),
+    $document = $(document),
+    scrollPercent
 
-    $window.scroll(function() {
-        scrollPercent = Math.round(100 * ($window.height() + $window.scrollTop())/$document.height());
-        if (scrollPercent > 90 && !isDuplicateScrollEvent) { //page scrolled to 90%
-            isDuplicateScrollEvent = 1;
-            ga('send', 'event', 'scroll',
-                'Window: ' + $window.height() + 'px; Document: ' + $document.height() + 'px; Time: ' + Math.round((new Date - scrollTimeStart )/1000,1) + 's'
-            );
-        }
-    });
-});
+  $window.scroll(function () {
+    scrollPercent = Math.round(
+      (100 * ($window.height() + $window.scrollTop())) / $document.height()
+    )
+    if (scrollPercent > 90 && !isDuplicateScrollEvent) {
+      //page scrolled to 90%
+      isDuplicateScrollEvent = 1
+      ga(
+        'send',
+        'event',
+        'scroll',
+        'Window: ' +
+          $window.height() +
+          'px; Document: ' +
+          $document.height() +
+          'px; Time: ' +
+          Math.round((new Date() - scrollTimeStart) / 1000, 1) +
+          's'
+      )
+    }
+  })
+})
 ```
 
 ## Internet Explorer
@@ -194,7 +215,7 @@ Enabling your application for pinning will allow IE users to add it to their
 Windows Taskbar and Start Menu. This comes with a range of new tools that you
 can easily configure with the elements below. See more [documentation on IE
 Pinned
-Sites](https://docs.microsoft.com/en-us/previous-versions/windows/internet-explorer/ie-developer/samples/gg491731(v%3dvs.85)).
+Sites](<https://docs.microsoft.com/en-us/previous-versions/windows/internet-explorer/ie-developer/samples/gg491731(v%3dvs.85)>).
 
 ### Name the Pinned Site for Windows
 
@@ -202,7 +223,7 @@ Without this rule, Windows will use the page title as the name for your
 application.
 
 ```html
-<meta name="application-name" content="Sample Title">
+<meta name="application-name" content="Sample Title" />
 ```
 
 ### Give your Pinned Site a tooltip
@@ -211,7 +232,10 @@ You know — a tooltip. A little textbox that appears when the user holds their
 mouse over your Pinned Site's icon.
 
 ```html
-<meta name="msapplication-tooltip" content="A description of what this site does.">
+<meta
+  name="msapplication-tooltip"
+  content="A description of what this site does."
+/>
 ```
 
 ### Set a default page for your Pinned Site
@@ -222,7 +246,10 @@ track the number of pinned users, like so:
 `https://www.example.com/index.html?pinned=true`
 
 ```html
-<meta name="msapplication-starturl" content="https://www.example.com/index.html?pinned=true">
+<meta
+  name="msapplication-starturl"
+  content="https://www.example.com/index.html?pinned=true"
+/>
 ```
 
 ### Recolor IE's controls manually for a Pinned Site
@@ -232,7 +259,7 @@ shade its browser buttons. UNLESS you give it another color here. Only use named
 colors (`red`) or hex colors (`#ff0000`).
 
 ```html
-<meta name="msapplication-navbutton-color" content="#ff0000">
+<meta name="msapplication-navbutton-color" content="#ff0000" />
 ```
 
 ### Manually set the window size of a Pinned Site
@@ -241,7 +268,7 @@ If the site should open at a certain window size once pinned, you can specify
 the dimensions here. It only supports static pixel dimensions. 800x600 minimum.
 
 ```html
-<meta name="msapplication-window" content="width=800;height=600">
+<meta name="msapplication-window" content="width=800;height=600" />
 ```
 
 ### Jump List "Tasks" for Pinned Sites
@@ -251,8 +278,14 @@ right-click. Each Task goes to the specified URL, and gets its own mini icon
 (essentially a favicon, a 16x16 .ICO). You can add as many of these as you need.
 
 ```html
-<meta name="msapplication-task" content="name=Task 1;action-uri=http://host/Page1.html;icon-uri=http://host/icon1.ico">
-<meta name="msapplication-task" content="name=Task 2;action-uri=http://microsoft.com/Page2.html;icon-uri=http://host/icon2.ico">
+<meta
+  name="msapplication-task"
+  content="name=Task 1;action-uri=http://host/Page1.html;icon-uri=http://host/icon1.ico"
+/>
+<meta
+  name="msapplication-task"
+  content="name=Task 2;action-uri=http://microsoft.com/Page2.html;icon-uri=http://host/icon2.ico"
+/>
 ```
 
 ### (Windows 8) High quality visuals for Pinned Sites
@@ -261,11 +294,11 @@ Windows 8 adds the ability for you to provide a PNG tile image and specify the
 tile's background color. [Full details on the IE
 blog](https://docs.microsoft.com/en-us/archive/blogs/ie/high-quality-visuals-for-pinned-sites-in-windows-8).
 
-* Create a 144x144 image of your site icon, filling all of the canvas, and using
+- Create a 144x144 image of your site icon, filling all of the canvas, and using
   a transparent background.
-* Save this image as a 32-bit PNG and optimize it without reducing colour-depth.
+- Save this image as a 32-bit PNG and optimize it without reducing colour-depth.
   It can be named whatever you want (e.g. `metro-tile.png`).
-* To reference the tile and its color, add the HTML `meta` elements described in
+- To reference the tile and its color, add the HTML `meta` elements described in
   the IE Blog post.
 
 ### (Windows 8) Badges for Pinned Sites
@@ -275,13 +308,16 @@ in the Start screen. The user will be able to receive these badge updates even
 when your app isn't actively running. The badge's value can be a number, or one
 of a predefined list of glyphs.
 
-* [Tutorial on IEBlog with link to badge XML
-schema](https://docs.microsoft.com/en-us/archive/blogs/ie/pinned-sites-in-windows-8)
-* [Available badge
+- [Tutorial on IEBlog with link to badge XML
+  schema](https://docs.microsoft.com/en-us/archive/blogs/ie/pinned-sites-in-windows-8)
+- [Available badge
   values](https://docs.microsoft.com/en-us/uwp/schemas/tiles/badgeschema/element-badge)
 
 ```html
-<meta name="msapplication-badge" value="frequency=NUMBER_IN_MINUTES;polling-uri=https://www.example.com/path/to/file.xml">
+<meta
+  name="msapplication-badge"
+  value="frequency=NUMBER_IN_MINUTES;polling-uri=https://www.example.com/path/to/file.xml"
+/>
 ```
 
 ## Search
@@ -291,11 +327,13 @@ schema](https://docs.microsoft.com/en-us/archive/blogs/ie/pinned-sites-in-window
 After creating a [sitemap](https://www.sitemaps.org/protocol.html)
 
 Submit it to search engine tool:
-* [Google](https://www.google.com/webmasters/tools/sitemap-list)
-* [Bing](https://www.bing.com/toolbox/webmaster)
-* [Yandex](https://webmaster.yandex.com/)
-* [Baidu](https://zhanzhang.baidu.com/) OR Insert the following line anywhere in
+
+- [Google](https://www.google.com/webmasters/tools/sitemap-list)
+- [Bing](https://www.bing.com/toolbox/webmaster)
+- [Yandex](https://webmaster.yandex.com/)
+- [Baidu](https://zhanzhang.baidu.com/) OR Insert the following line anywhere in
   your robots.txt file, specifying the path to your sitemap:
+
 ```
 Sitemap: https://example.com/sitemap_location.xml
 ```
@@ -307,7 +345,7 @@ allow search engines to index your "Contact Us" or "Complaints" page if you
 value your sanity. This is an HTML-centric way of achieving that.
 
 ```html
-<meta name="robots" content="noindex">
+<meta name="robots" content="noindex" />
 ```
 
 **_WARNING:_** DO NOT INCLUDE ON PAGES THAT SHOULD APPEAR IN SEARCH ENGINES.
@@ -320,34 +358,35 @@ plugin behaves in the browser. [How to make a browser search
 plugin](https://www.google.com/search?ie=UTF-8&q=how+to+make+browser+search+plugin).
 
 ```html
-<link rel="search" title="" type="application/opensearchdescription+xml" href="">
+<link
+  rel="search"
+  title=""
+  type="application/opensearchdescription+xml"
+  href=""
+/>
 ```
-
 
 ## Miscellaneous
 
-* Use
+- Use
   [polyfills](https://github.com/Modernizr/Modernizr/wiki/HTML5-Cross-browser-Polyfills).
 
-* Use [Microformats](http://microformats.org/wiki/Main_Page) (via
+- Use [Microformats](http://microformats.org/wiki/Main_Page) (via
   [microdata](http://microformats.org/wiki/microdata)) for optimum search
   results
   [visibility](https://webmasters.googleblog.com/2009/05/introducing-rich-snippets.html).
 
-* If you want to disable the translation prompt in Chrome or block Google
-  Translate from translating your web page, use [`<meta name="google"
-  content="notranslate">`](https://support.google.com/webmasters/answer/79812).
+- If you want to disable the translation prompt in Chrome or block Google
+  Translate from translating your web page, use [`<meta name="google" content="notranslate">`](https://support.google.com/webmasters/answer/79812).
   To disable translation for a particular section of the web page, add
   [`class="notranslate"`](https://support.google.com/translate/?hl=en#2641276).
 
-* If you want to disable the automatic detection and formatting of possible
-  phone numbers in Safari on iOS, use [`<meta name="format-detection"
-  content="telephone=no">`](https://developer.apple.com/library/archive/documentation/AppleApplications/Reference/SafariHTMLRef/Articles/MetaTags.html).
+- If you want to disable the automatic detection and formatting of possible
+  phone numbers in Safari on iOS, use [`<meta name="format-detection" content="telephone=no">`](https://developer.apple.com/library/archive/documentation/AppleApplications/Reference/SafariHTMLRef/Articles/MetaTags.html).
 
-* Avoid development/stage websites "leaking" into SERPs (search engine results
+- Avoid development/stage websites "leaking" into SERPs (search engine results
   page) by [implementing X-Robots-tag
   headers](https://github.com/h5bp/html5-boilerplate/issues/804).
-
 
 ## News Feeds
 
@@ -357,17 +396,22 @@ Have an RSS feed? Link to it here. Want to [learn how to write an RSS feed from
 scratch](https://www.rssboard.org/rss-specification)?
 
 ```html
-<link rel="alternate" type="application/rss+xml" title="RSS" href="/rss.xml">
+<link rel="alternate" type="application/rss+xml" title="RSS" href="/rss.xml" />
 ```
 
 ### Atom
 
 Atom is similar to RSS, and you might prefer to use it instead of or in addition
 to it. [See what Atom's all
-about](https://en.wikipedia.org/wiki/Atom_(Web_standard)).
+about](<https://en.wikipedia.org/wiki/Atom_(Web_standard)>).
 
 ```html
-<link rel="alternate" type="application/atom+xml" title="Atom" href="/atom.xml">
+<link
+  rel="alternate"
+  type="application/atom+xml"
+  title="Atom"
+  href="/atom.xml"
+/>
 ```
 
 ### Pingbacks
@@ -376,17 +420,15 @@ Your server may be notified when another site links to yours. The href attribute
 should contain the location of your pingback service.
 
 ```html
-<link rel="pingback" href="">
+<link rel="pingback" href="" />
 ```
 
-* High-level explanation:
+- High-level explanation:
   https://codex.wordpress.org/Introduction_to_Blogging#Pingbacks
-* Step-by-step example case:
+- Step-by-step example case:
   https://www.hixie.ch/specs/pingback/pingback-1.0#TOC5
-* PHP pingback service:
+- PHP pingback service:
   https://web.archive.org/web/20131211032834/http://blog.perplexedlabs.com/2009/07/15/xmlrpc-pingbacks-using-php/
-
-
 
 ## Social Networks
 
@@ -408,14 +450,14 @@ Debugger](https://developers.facebook.com/tools/debug/) (needs registration to
 Facebook).
 
 ```html
-<meta property="fb:app_id" content="123456789">
-<meta property="og:url" content="https://www.example.com/path/to/page.html">
-<meta property="og:type" content="website">
-<meta property="og:title" content="">
-<meta property="og:image" content="https://www.example.com/path/to/image.jpg">
-<meta property="og:description" content="">
-<meta property="og:site_name" content="">
-<meta property="article:author" content="">
+<meta property="fb:app_id" content="123456789" />
+<meta property="og:url" content="https://www.example.com/path/to/page.html" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="" />
+<meta property="og:image" content="https://www.example.com/path/to/image.jpg" />
+<meta property="og:description" content="" />
+<meta property="og:site_name" content="" />
+<meta property="article:author" content="" />
 ```
 
 ### Twitter Cards
@@ -430,13 +472,16 @@ validator](https://cards-dev.twitter.com/validator) (needs registration to
 Twitter).
 
 ```html
-<meta name="twitter:card" content="summary">
-<meta name="twitter:site" content="@site_account">
-<meta name="twitter:creator" content="@individual_account">
-<meta name="twitter:url" content="https://www.example.com/path/to/page.html">
-<meta name="twitter:title" content="">
-<meta name="twitter:description" content="">
-<meta name="twitter:image" content="https://www.example.com/path/to/image.jpg">
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@site_account" />
+<meta name="twitter:creator" content="@individual_account" />
+<meta name="twitter:url" content="https://www.example.com/path/to/page.html" />
+<meta name="twitter:title" content="" />
+<meta name="twitter:description" content="" />
+<meta
+  name="twitter:image"
+  content="https://www.example.com/path/to/image.jpg"
+/>
 ```
 
 ### Schema.org
@@ -456,12 +501,13 @@ note that this markup requires to add attributes to your top `html` tag.
 ```html
 <html class="no-js" lang="" itemscope itemtype="https://schema.org/Article">
   <head>
-
-    <link rel="author" href="">
-    <link rel="publisher" href="">
-    <meta itemprop="name" content="">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="">
+    <link rel="author" href="" />
+    <link rel="publisher" href="" />
+    <meta itemprop="name" content="" />
+    <meta itemprop="description" content="" />
+    <meta itemprop="image" content="" />
+  </head>
+</html>
 ```
 
 ## URLs
@@ -474,7 +520,7 @@ parameters after a `#` or `?` is used to control the display state of a page.
 the cleaner, more accurate `https://www.example.com/cart.html`.
 
 ```html
-<link rel="canonical" href="">
+<link rel="canonical" href="" />
 ```
 
 ### Separate mobile URLs
@@ -485,47 +531,44 @@ site.
 
 This can be done by adding the following annotations in your HTML pages:
 
-* on the desktop page, add the `link rel="alternate"` tag pointing to the
+- on the desktop page, add the `link rel="alternate"` tag pointing to the
   corresponding mobile URL, e.g.:
 
-  `<link rel="alternate" media="only screen and (max-width: 640px)"
-  href="https://m.example.com/page.html" >`
+  `<link rel="alternate" media="only screen and (max-width: 640px)" href="https://m.example.com/page.html" >`
 
-* on the mobile page, add the `link rel="canonical"` tag pointing to the
+- on the mobile page, add the `link rel="canonical"` tag pointing to the
   corresponding desktop URL, e.g.:
 
   `<link rel="canonical" href="https://www.example.com/page.html">`
 
 For more information please see:
 
-* https://developers.google.com/search/mobile-sites/mobile-seo/separate-urls
-
+- https://developers.google.com/search/mobile-sites/mobile-seo/separate-urls
 
 ## Web Apps
 
 There are a couple of meta tags that provide information about a web app when
 added to the Home Screen on iOS:
 
-* Adding `apple-mobile-web-app-capable` will make your web app chrome-less and
+- Adding `apple-mobile-web-app-capable` will make your web app chrome-less and
   provide the default iOS app view. You can control the color scheme of the
   default view by adding `apple-mobile-web-app-status-bar-style`.
 
 ```html
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
 ```
 
-* You can use `apple-mobile-web-app-title` to add a specific sites name for the
+- You can use `apple-mobile-web-app-title` to add a specific sites name for the
   Home Screen icon.
 
 ```html
-<meta name="apple-mobile-web-app-title" content="">
+<meta name="apple-mobile-web-app-title" content="" />
 ```
 
 For further information please read the [official
 documentation](https://developer.apple.com/library/archive/documentation/AppleApplications/Reference/SafariHTMLRef/Articles/MetaTags.html)
 on Apple's site.
-
 
 ### Apple Touch Icons
 
@@ -537,12 +580,11 @@ Though the dimensions of the icon can vary between iOS devices and versions one
 `<head>` of the page is enough:
 
 ```html
-<link rel="apple-touch-icon" href="icon.png">
+<link rel="apple-touch-icon" href="icon.png" />
 ```
 
 For a more comprehensive overview, please refer to Mathias' [article on Touch
 Icons](https://mathiasbynens.be/notes/touch-icons).
-
 
 ### Apple Touch Startup Image
 
@@ -553,9 +595,12 @@ necessary to add media queries to detect which image to load. Here is an example
 for an iPhone:
 
 ```html
-<link rel="apple-touch-startup-image" media="(max-device-width: 480px) and (-webkit-min-device-pixel-ratio: 2)" href="img/startup.png">
+<link
+  rel="apple-touch-startup-image"
+  media="(max-device-width: 480px) and (-webkit-min-device-pixel-ratio: 2)"
+  href="img/startup.png"
+/>
 ```
-
 
 ### Chrome Mobile web apps
 
@@ -564,13 +609,13 @@ homescreen](https://developer.chrome.com/multidevice/android/installtohomescreen
 which tries to be a more generic replacement to Apple's proprietary meta tag:
 
 ```html
-<meta name="mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes" />
 ```
 
 Same applies to the touch icons:
 
 ```html
-<link rel="icon" sizes="192x192" href="highres-icon.png">
+<link rel="icon" sizes="192x192" href="highres-icon.png" />
 ```
 
 ### Theme Color
@@ -582,7 +627,7 @@ use if they customize the display of individual pages in their UIs with varying
 colors.
 
 ```html
-<meta name="theme-color" content="#ff69b4">
+<meta name="theme-color" content="#ff69b4" />
 ```
 
 The `content` attribute extension can take any valid CSS color.
@@ -590,7 +635,6 @@ The `content` attribute extension can take any valid CSS color.
 Currently, the `theme-color` meta extension is supported by [Chrome 39+ for
 Android
 Lollipop](https://developers.google.com/web/updates/2014/11/Support-for-theme-color-in-Chrome-39-for-Android).
-
 
 ## security.txt
 

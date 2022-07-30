@@ -93,7 +93,7 @@ A helpful custom 404 to get you started.
 This file contains all settings regarding custom tiles for IE11 and Edge.
 
 For more info on this topic, please refer to [Microsoft's
-Docs](https://docs.microsoft.com/en-us/previous-versions/windows/internet-explorer/ie-developer/platform-apis/dn320426(v=vs.85)).
+Docs](<https://docs.microsoft.com/en-us/previous-versions/windows/internet-explorer/ie-developer/platform-apis/dn320426(v=vs.85)>).
 
 ### .editorconfig
 
