@@ -1,7 +1,6 @@
 #city {
-  background-color: blue;
   bottom: 0;
-  opacity: 0.5;
+  overflow: hidden;
   position: absolute;
   width: 100vw;
 }
@@ -10,6 +9,12 @@
   background-color: black;
   height: 100vh;
   width: 100vw;
+}
+
+.building {
+  background-color: #cccc00;
+  bottom: 0;
+  position: absolute;
 }
 
 .star {
