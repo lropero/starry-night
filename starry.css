@@ -8,10 +8,8 @@
 #dot {
   background-color: red;
   border-radius: 50%;
-  height: 8px;
   position: absolute;
   visibility: hidden;
-  width: 8px;
   z-index: 1;
 }
 

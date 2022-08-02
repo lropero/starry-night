@@ -88,8 +88,11 @@ document.addEventListener('DOMContentLoaded', () => {
     for (let i = 0; i < Math.round(dimensions.city.width / (Math.floor(Math.random() * 13) + 8)); i++) {
       buildings.push(newBuilding())
     }
-    dot.style.bottom = `${highest.height + 3}px`
-    dot.style.left = `${Math.round(highest.left + highest.width / 2 - 4)}px`
+    const diameter = Math.floor(Math.random() * 4) + 5
+    dot.style.bottom = `${highest.height + diameter / 2}px`
+    dot.style.height = `${diameter}px`
+    dot.style.left = `${Math.round(highest.left + highest.width / 2 - diameter / 2)}px`
+    dot.style.width = `${diameter}px`
   }
 
   const switchDot = () => {
