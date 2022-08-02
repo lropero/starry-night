@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const width = Math.round(Math.floor(Math.random() * (dimensions.city.height / 4 + 1)) + dimensions.city.height / 4)
     const left = Math.round(Math.floor(Math.random() * dimensions.city.width) - width / 2)
     const windowFrame = Math.floor(Math.random() * 3) + 3
-    const windowSize = Math.floor(Math.random() * 2) + 1
+    const windowSize = Math.random() * 3 > 1 ? 2 : 1
     building.classList.add('building')
     building.style.height = `${height}px`
     building.style.left = `${left}px`
@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     city.appendChild(building)
     if (!highest || height > highest.height) {
-      highest = { building, height, left, width, windowFrame }
+      highest = { building, height, left, width }
     }
     return building
   }
@@ -46,14 +46,14 @@ document.addEventListener('DOMContentLoaded', () => {
     floor.className = 'floor'
     floor.style.height = `${windowFrame * 2 + windowSize}px`
     for (let i = 0; i < Math.floor(width / (windowFrame * 2 + windowSize)); i++) {
-      const color = ['#999900', '#999966', '#cccc00', '#cccc66', '#eeee00'][Math.floor(Math.random() * 5)]
+      const color = ['#999900', '#999966', '#cccc00', '#cccc66', '#eeee00', '#eeee66'][Math.floor(Math.random() * 6)]
       const window = document.createElement('div')
       window.className = 'window'
       if (windowSize === 1) {
         window.style.backgroundColor = color
       } else {
-        window.style.backgroundColor = Math.random() * 3 > 1 ? color : 'black'
-        window.style.boxShadow = `1px 0 ${Math.random() * 3 > 1 ? color : 'black'}, 0 1px ${Math.random() * 3 > 1 ? color : 'black'}, 1px 1px ${Math.random() * 3 > 1 ? color : 'black'}`
+        window.style.backgroundColor = Math.random() * 4 > 1 ? color : 'black'
+        window.style.boxShadow = `1px 0 ${Math.random() * 4 > 1 ? color : 'black'}, 0 1px ${Math.random() * 4 > 1 ? color : 'black'}, 1px 1px ${Math.random() * 4 > 1 ? color : 'black'}`
       }
       window.style.margin = `${windowFrame}px`
       floor.appendChild(window)
@@ -88,7 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
     for (let i = 0; i < Math.round(dimensions.city.width / (Math.floor(Math.random() * 13) + 8)); i++) {
       buildings.push(newBuilding())
     }
-    dot.style.bottom = `${highest.height + highest.windowFrame}px`
+    dot.style.bottom = `${highest.height + 3}px`
     dot.style.left = `${Math.round(highest.left + highest.width / 2 - 4)}px`
   }
 
