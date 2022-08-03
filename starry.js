@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
     floor.style.height = `${windowFrame * 2 + windowSize}px`
     for (let i = 0; i < Math.floor(width / (windowFrame * 2 + windowSize)); i++) {
       const color = ['#999900', '#999966', '#cccc00', '#cccc66', '#eeee00', '#eeee66', '#ffff00'][Math.floor(Math.random() * 7)]
-      const window = document.createElement('div')
+      const window = document.createElement('span')
       window.className = 'window'
       if (windowSize === 1) {
         window.style.backgroundColor = color
@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   const newStar = () => {
-    const star = document.createElement('div')
+    const star = document.createElement('span')
     star.classList.add('star')
     star.style.backgroundColor = ['#666666', '#777777', '#888888', '#999999', '#aaaaaa', '#bbbbbb', '#cccccc', '#dddddd', '#eeeeee', '#ffffff'][Math.floor(Math.random() * 10)]
     star.style.left = `${Math.floor(Math.random() * dimensions.sky.width)}px`
@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     star.style.top = `${dimensions.sky.height - i}px`
     sky.appendChild(star)
-    setTimeout(() => sky.removeChild(star), Math.floor(Math.random() * dimensions.sky.height * dimensions.sky.width) + 60000)
+    setTimeout(() => sky.removeChild(star), Math.round(Math.random() * dimensions.sky.height * dimensions.sky.width) + 60000)
   }
 
   const reset = () => {
