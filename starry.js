@@ -41,12 +41,12 @@ document.addEventListener('DOMContentLoaded', () => {
     return building
   }
 
-  const newFloor = function makeWindows (width, windowFrame, windowSize) {
+  const newFloor = (width, windowFrame, windowSize) => {
     const floor = document.createElement('div')
     floor.className = 'floor'
     floor.style.height = `${windowFrame * 2 + windowSize}px`
     for (let i = 0; i < Math.floor(width / (windowFrame * 2 + windowSize)); i++) {
-      const color = ['#999900', '#999966', '#cccc00', '#cccc66', '#eeee00', '#eeee66'][Math.floor(Math.random() * 6)]
+      const color = ['#999900', '#999966', '#cccc00', '#cccc66', '#eeee00', '#eeee66', '#ffff00'][Math.floor(Math.random() * 7)]
       const window = document.createElement('div')
       window.className = 'window'
       if (windowSize === 1) {
@@ -103,7 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const windows = document.querySelectorAll('.window')
     const windowsOn = document.querySelectorAll('.window.on')
     let randomWindow = windows[Math.floor(Math.random() * windows.length)]
-    if (windowsOn.length / windows.length < 0.7) {
+    if (windowsOn.length / windows.length < 0.72) {
       while (randomWindow.classList.contains('on')) {
         randomWindow = windows[Math.floor(Math.random() * windows.length)]
       }
@@ -116,8 +116,8 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   reset()
-  setInterval(newStar, 10)
+  setInterval(newStar, 25)
   setInterval(switchDot, 1500)
-  setInterval(switchWindow, 5)
+  setInterval(switchWindow, 10)
   window.addEventListener('resize', debounce(reset))
 })
