@@ -15,14 +15,21 @@ document.addEventListener('DOMContentLoaded', () => {
   let dimensions
   let highest
 
+  const animate = (frame = 0) => {
+    frame % 2 === 0 && newStar()
+    frame % 80 === 0 && switchDot()
+    switchWindow()
+    window.requestAnimationFrame(() => animate(++frame))
+  }
+
   const gauss = number => {
     return (number * (number + 1)) / 2
   }
 
   const newBuilding = () => {
     const building = document.createElement('div')
-    const height = Math.round(Math.floor(Math.random() * (dimensions.city.height - dimensions.city.height / 8 + 1)) + dimensions.city.height / 8)
-    const width = Math.round(Math.floor(Math.random() * (dimensions.city.height / 4 + 1)) + dimensions.city.height / 4)
+    const height = Math.round(Math.floor(Math.random() * (dimensions.city.height - dimensions.city.height / 8)) + dimensions.city.height / 8)
+    const width = Math.round(Math.floor(Math.random() * (dimensions.city.height / 4)) + dimensions.city.height / 4)
     const left = Math.round(Math.floor(Math.random() * dimensions.city.width) - width / 2)
     const windowFrame = Math.floor(Math.random() * 3) + 3
     const windowSize = Math.random() * 3 > 1 ? 2 : 1
@@ -83,7 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     buildings = []
     dimensions = { sky: sky.getBoundingClientRect() }
-    city.style.height = `${Math.round(Math.floor(Math.random() * (dimensions.sky.height / 2 - dimensions.sky.height / 5 + 1)) + dimensions.sky.height / 5)}px`
+    city.style.height = `${Math.round(Math.floor(Math.random() * (dimensions.sky.height / 3 - dimensions.sky.height / 5)) + dimensions.sky.height / 5)}px`
     dimensions.city = city.getBoundingClientRect()
     for (let i = 0; i < Math.round(dimensions.city.width / (Math.floor(Math.random() * 13) + 8)); i++) {
       buildings.push(newBuilding())
@@ -116,8 +123,6 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   reset()
-  setInterval(newStar, 25)
-  setInterval(switchDot, 1500)
-  setInterval(switchWindow, 10)
   window.addEventListener('resize', debounce(reset))
+  animate()
 })
